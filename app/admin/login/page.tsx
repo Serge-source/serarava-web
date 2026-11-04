@@ -24,8 +24,8 @@ export default function AdminLoginPage() {
       })
       if (res?.error) {
         setError('Invalid email or password.')
-      } else if (res?.url) {
-        window.location.href = res.url
+      } else {
+        window.location.href = callbackUrl
       }
     })
   }

@@ -7,6 +7,10 @@ const loginSchema = z.object({
   password: z.string().min(1),
 })
 
+if (!process.env.AUTH_SECRET) {
+  console.error('[auth] AUTH_SECRET is not set — NextAuth will fail')
+}
+
 export const { handlers, auth, signIn, signOut } = NextAuth({
   secret: process.env.AUTH_SECRET,
   session: { strategy: 'jwt' },

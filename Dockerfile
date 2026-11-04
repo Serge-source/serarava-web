@@ -11,6 +11,7 @@ FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npx prisma generate
+ENV DOCKER_BUILD=1
 RUN npm run build
 
 # Production image

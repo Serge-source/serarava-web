@@ -22,6 +22,7 @@ export default function AdminLoginPage() {
         redirect: false,
         callbackUrl,
       })
+      console.log('[login] signIn result:', JSON.stringify(res))
       if (res?.error) {
         setError('Invalid email or password.')
       } else {

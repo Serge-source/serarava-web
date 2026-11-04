@@ -93,7 +93,7 @@ export default function ContactForm() {
   const fieldStyle = (key: keyof FormState) => ({
     padding: '14px 16px',
     borderRadius: 14,
-    border: `1px solid ${errors[key] ? '#A3412F' : 'rgba(38,61,53,0.18)'}`,
+    border: `1px solid ${errors[key as keyof VisibleFields] ? '#A3412F' : 'rgba(38,61,53,0.18)'}`,
     background: '#F8F6F1',
     fontSize: 15,
     color: '#292929',

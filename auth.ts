@@ -46,7 +46,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
               where: { email: parsed.data.email },
             })
             if (!user || user.status !== 'Active') return null
-            const ok = await bcrypt.compare(parsed.data.password, user.passwordHash)
+            const ok = await bcrypt.compare(parsed.data.password, user.password)
             if (!ok) return null
             return { id: user.id, name: user.name, email: user.email, role: user.role }
           } catch {

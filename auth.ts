@@ -1,7 +1,6 @@
 import NextAuth from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
 import { z } from 'zod'
-import bcrypt from 'bcryptjs'
 
 const loginSchema = z.object({
   email: z.string().email(),
@@ -46,6 +45,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
               where: { email: parsed.data.email },
             })
             if (!user || user.status !== 'Active') return null
+            const bcrypt = (await import('bcryptjs')).default
             const ok = await bcrypt.compare(parsed.data.password, user.password)
             if (!ok) return null
             return { id: user.id, name: user.name, email: user.email, role: user.role }

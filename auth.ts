@@ -13,6 +13,7 @@ if (!process.env.AUTH_SECRET) {
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   secret: process.env.AUTH_SECRET,
+  trustHost: true,
   session: { strategy: 'jwt' },
   pages: { signIn: '/admin/login' },
   callbacks: {

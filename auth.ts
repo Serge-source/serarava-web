@@ -15,6 +15,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   secret: process.env.AUTH_SECRET,
   trustHost: true,
   session: { strategy: 'jwt' },
+  cookies: {
+    sessionToken: {
+      name: `__Secure-authjs.session-token`,
+      options: { httpOnly: true, sameSite: 'lax', path: '/', secure: true },
+    },
+  },
   pages: { signIn: '/admin/login' },
   callbacks: {
     async jwt({ token, user }) {

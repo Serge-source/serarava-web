@@ -7,7 +7,11 @@ export async function proxy(req: NextRequest) {
   if (pathname === '/admin/login') return NextResponse.next()
 
   if (pathname.startsWith('/admin')) {
-    const token = await getToken({ req, secret: process.env.AUTH_SECRET })
+    const token = await getToken({
+      req,
+      secret: process.env.AUTH_SECRET,
+      cookieName: '__Secure-authjs.session-token',
+    })
     if (!token) {
       const loginUrl = new URL('/admin/login', req.url)
       loginUrl.searchParams.set('callbackUrl', pathname)
